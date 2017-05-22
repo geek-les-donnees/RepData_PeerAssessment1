@@ -122,16 +122,8 @@ $(document).ready(function () {
 
 <p>set the working directory and load all packages used in this exploratory analysis</p>
 <pre class="r"><code>library(knitr)
-library(dplyr)</code></pre>
-<pre><code>## 
-## Attaching package: 'dplyr'</code></pre>
-<pre><code>## The following objects are masked from 'package:stats':
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code>library(ggplot2)
+library(dplyr)
+library(ggplot2)
 
 
 setwd(&quot;~/Learning/Coursera_DS_Specialization/Course5_ReproducibleResearch/Week2_project&quot;)</code></pre>
@@ -194,7 +186,7 @@ steps_by_day</code></pre>
 </div>
 <div id="what-is-the-average-daily-activity-pattern" class="section level1">
 <h1>What is the average daily activity pattern?</h1>
-<p>1.Make a time series plot (i.e. type = “l”) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)</p>
+<p>1.Make a time series plot (i.e. type = â€œlâ€) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)</p>
 <p>2.Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?</p>
 <pre class="r"><code>steps_by_interval &lt;- aggregate(steps ~ interval, data_na_rem, mean)
 
@@ -268,13 +260,13 @@ head(df_imputed_steps_by_day)</code></pre>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
 <h2>Are there differences in activity patterns between weekdays and weekends?</h2>
 <p>For this part the weekdays() function may be of some help here. Use the dataset with the filled-in missing values for this part.</p>
-<p>1.Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.</p>
+<p>1.Create a new factor variable in the dataset with two levels â€“ â€œweekdayâ€ and â€œweekendâ€ indicating whether a given date is a weekday or weekend day.</p>
 <pre class="r"><code>data_imputed['type_of_day'] &lt;- weekdays(as.Date(data_imputed$date))
 data_imputed$type_of_day[data_imputed$type_of_day  %in% c('Saturday','Sunday') ] &lt;- &quot;weekend&quot;
 data_imputed$type_of_day[data_imputed$type_of_day != &quot;weekend&quot;] &lt;- &quot;weekday&quot;
 
 data_imputed$type_of_day &lt;- as.factor(data_imputed$type_of_day)</code></pre>
-<p>2.Make a panel plot containing a time series plot (i.e. type = “l”) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). See the README file in the GitHub repository to see an example of what this plot should look like using simulated data.</p>
+<p>2.Make a panel plot containing a time series plot (i.e. type = â€œlâ€) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). See the README file in the GitHub repository to see an example of what this plot should look like using simulated data.</p>
 <pre class="r"><code>df_imputed_steps_by_interval &lt;- aggregate(steps ~ interval + type_of_day, data_imputed, mean)
 
 qplot(interval, 
